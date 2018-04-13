@@ -41,7 +41,23 @@
   <script src="build/vendor.js"></script>
 
   <!-- The main bundle js is generated during the build process -->
-  <script src="build/main.js"></script>
+  <script src="assets/riga.js"></script>
+
+  <script type="text/javascript">
+      setTimeout(function(){
+          loadScript("build/main.js", function(){
+          });
+      }, 5000);
+  </script>
+
+  <div style="text-align: center; height: 300px;">
+    <h1>Hello Riga!!!!</h1>
+    <img src="assets/imgs/spring-campus-logo.png"/>
+  </div>
+
+  <div id="loader" class="cssload-container">
+    <div class="cssload-whirlpool"></div>
+  </div>
 
 </body>
 </html>
