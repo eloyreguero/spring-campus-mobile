@@ -23,6 +23,18 @@
     }
   </script>
 
+  <script>
+      if (!('Notification' in window)) {
+          console.log('This browser does not support notifications!');
+      } else {
+          console.log('This browser does support notifications!');
+
+          Notification.requestPermission(function(status) {
+              console.log('Notification permission status:', status);
+          });
+      }
+  </script>
+
   <link href="build/main.css" rel="stylesheet">
 
 </head>
