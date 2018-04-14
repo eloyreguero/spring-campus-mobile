@@ -66,3 +66,13 @@ function takePhoto() {
 })
 .catch(err => alert('Error: ' + err));
 }
+
+
+// Vibrate
+function vibrateSimple() {
+    navigator.vibrate(200);
+}
+
+function vibratePattern() {
+    navigator.vibrate([100,30,100,30,100,200,200,30,200,30,200,200,100,30,100,30,100]); // SOS in Morse
+}
