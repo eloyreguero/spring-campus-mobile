@@ -7,5 +7,15 @@
 </ion-header>
 
 <ion-content padding>
+  <button ion-button icon-start onclick="getStream()">
+    <ion-icon name='camera'></ion-icon>
+    Open Camera
+  </button>
+  <p><video autoplay style="height: 70%; width: 70%;"></video></p>
 
+  <button ion-button icon-start color="secondary" onclick="takePhoto()">
+    <ion-icon name='image'></ion-icon>
+    Take Photo
+  </button>
+  <p><img id="imageTag" style="height: 100%; width: 100%;"></p>
 </ion-content>
