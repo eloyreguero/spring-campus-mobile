@@ -12,7 +12,6 @@ import { Observable } from "rxjs/Observable";
 export class ApiServiceProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello ApiServiceProvider Provider');
   }
 
     public getShows(): Observable<any> {
