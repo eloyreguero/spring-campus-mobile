@@ -3,24 +3,47 @@ import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from "../../providers/api-service/api-service";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
 
-  public shows: any[];
+    public allShows: any[];
+    public visibleShows: any[];
 
-  constructor(public navCtrl: NavController, public apiService: ApiServiceProvider) {
-    this.loadShows();
-  }
+    constructor(public navCtrl: NavController, public apiService: ApiServiceProvider) {
+        this.loadShows();
+    }
 
-  private loadShows() {
-      this.apiService.getShows().subscribe(result =>
-          {
-              console.log(result);
-              this.shows = result;
-          }
-      )
-  }
+    private loadShows() {
+        this.apiService.getShows().subscribe(result => {
+                this.allShows = result;
+                this.visibleShows = this.allShows.splice(0, 20);
+            }
+        )
+    }
+    
+    public loadMoreData(infiniteScroll) {
+        setTimeout(() => {
+            var total = this.visibleShows.length;
+            for (let i = 0; i < 50; i++) {
+                var idx = total + i;
+                if (this.allShows[idx]) {
+                    this.visibleShows.push(this.allShows[idx]);
+                }
+            }
+            infiniteScroll.complete();
+        }, 500);
+
+    }
+
+    public doRefresh(refresher) {
+        setTimeout(() => {
+            this.allShows = this.allShows.slice(0, 20)
+            refresher.complete();
+        }, 2000);
+
+    }
+
 
 }

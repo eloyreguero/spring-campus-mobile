@@ -1,17 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>TV Shows</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>TV Shows</h2>
-  <ion-list>
-    <ion-item *ngFor="let show of shows">
-      {{show.name}}
-      <ion-avatar item-start>
-        <img src="{{show.image?.medium.replace('http://','https://')}}">
-      </ion-avatar>
-    </ion-item>
-  </ion-list>
+    <!-- Push screen to refresh data -->
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown"
+                               pullingText="Pull to refresh"
+                               refreshingSpinner="circles"
+                               refreshingText="Refreshing...">
+
+        </ion-refresher-content>
+    </ion-refresher>
+
+
+    <ion-list>
+        <ion-item *ngFor="let show of visibleShows">
+            {{show.name}}
+            <ion-avatar item-start>
+                <img src="{{show.image?.medium.replace('http://','https://')}}">
+            </ion-avatar>
+        </ion-item>
+    </ion-list>
+
+    <!-- Load the next X shows -->
+    <ion-infinite-scroll (ionInfinite)="loadMoreData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
 </ion-content>
